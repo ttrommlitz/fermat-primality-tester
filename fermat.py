@@ -18,6 +18,7 @@ def mod_exp(x, y, N):
 
 def fprobability(k):
     # You will need to implement this function and change the return value.   
+    # probability of correct answer >= 1 - 1 / (2^k)
     return 0.0
 
 
@@ -27,13 +28,12 @@ def mprobability(k):
 
 
 def run_fermat(N,k):
-    # You will need to implement this function and change the return value, which should be
-    # either 'prime' or 'composite'.
-    #
-    # To generate random values for a, you will most likley want to use
-    # random.randint(low,hi) which gives a random integer between low and
-    #  hi, inclusive.
-    return 'prime'
+    for i in range(k):
+        a = random.randint(1, N - 1)
+        if mod_exp(a, N - 1, N) == 1:
+            return 'prime'
+
+    return 'composite'
 
 
 def run_miller_rabin(N,k):
