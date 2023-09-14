@@ -30,10 +30,10 @@ def mprobability(k):
 def run_fermat(N,k):
     for i in range(k):
         a = random.randint(1, N - 1)
-        if mod_exp(a, N - 1, N) == 1:
-            return 'prime'
+        if mod_exp(a, N - 1, N) != 1:
+            return 'composite'
 
-    return 'composite'
+    return 'prime'
 
 
 def run_miller_rabin(N,k):
@@ -44,3 +44,5 @@ def run_miller_rabin(N,k):
     # random.randint(low,hi) which gives a random integer between low and
     #  hi, inclusive.
     return 'composite'
+
+print(run_fermat(709, 100))
