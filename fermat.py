@@ -22,8 +22,7 @@ def fprobability(k):
 
 
 def mprobability(k):
-    # You will need to implement this function and change the return value.   
-    return 0.0
+    return 1 - (1/ 4**k)
 
 
 def run_fermat(N,k):
@@ -60,5 +59,4 @@ def run_miller_rabin(N,k):
                 return 'composite'
     return 'prime'
 
-print(run_miller_rabin(97, 100))
 
