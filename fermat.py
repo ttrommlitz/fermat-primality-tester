@@ -7,9 +7,9 @@ def prime_test(N, k):
 
 
 def mod_exp(x, y, N):
-    # You will need to implement this function and change the return value.   
     if y == 0:
         return 1
+    
     z = mod_exp(x, y // 2, N)
     if y % 2 == 0:
         return z**2 % N
@@ -26,6 +26,8 @@ def mprobability(k):
 
 
 def run_fermat(N,k):
+    # we compute k random a's, then run Fermat's Little Theorem for each a. 
+    # If all a's return 1 for mod_exp, then N is very likely to be prime
     for i in range(k):
         a = random.randint(1, N - 1)
         if mod_exp(a, N - 1, N) != 1:
@@ -35,13 +37,8 @@ def run_fermat(N,k):
 
 
 def run_miller_rabin(N,k):
-    # You will need to implement this function and change the return value, which should be
-    # either 'prime' or 'composite'.
-    #
-    # To generate random values for a, you will most likley want to use
-    # random.randint(low,hi) which gives a random integer between low and
-    #  hi, inclusive.
     for i in range(k):
+        # initial test for a. This is identical to the fermat test.
         a = random.randint(1, N - 1)
         exponent = N - 1
         res = mod_exp(a, exponent, N)
@@ -49,6 +46,9 @@ def run_miller_rabin(N,k):
             return 'composite'
         exponent == exponent / 2
 
+        # if the fermat test passes, then we half the exponent if possible, and then continually
+        # run mod_exp. If that function returns 1, continue. If it returns -1, start with a new a.
+        # If it returns anything else, the number is composite. If all a's pass, then the number is prime
         while (exponent % 2 == 0):
             res = mod_exp(a, exponent, N)
             if res == 1:
@@ -58,5 +58,3 @@ def run_miller_rabin(N,k):
             else:
                 return 'composite'
     return 'prime'
-
-
